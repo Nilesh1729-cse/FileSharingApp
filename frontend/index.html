@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CloudShare - Fast, Secure & Modern File Sharing</title>
+  <meta name="description" content="Share, store, and collaborate on files with end-to-end encryption, lightning speeds, and instant link generation.">
+
+  <!-- Google Fonts (Plus Jakarta Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5.3 CSS via CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Bootstrap Icons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg glass-nav sticky-top py-3">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-dark fs-4" href="index.html">
+        <div class="bg-primary text-white rounded-3 p-2 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+          <i class="bi bi-cloud-arrow-up-fill fs-5"></i>
+        </div>
+        <span>Cloud<span class="text-primary">Share</span></span>
+      </a>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarMain">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-3">
+          <li class="nav-item"><a class="nav-link fw-medium text-dark active" href="#features">Features</a></li>
+          <li class="nav-item"><a class="nav-link fw-medium text-muted" href="#security">Security</a></li>
+          <li class="nav-item"><a class="nav-link fw-medium text-muted" href="#pricing">Pricing</a></li>
+          <li class="nav-item"><a class="nav-link fw-medium text-muted" href="#faq">FAQ</a></li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2">
+          <a href="login.html" class="btn btn-outline-primary px-3">Sign In</a>
+          <a href="register.html" class="btn btn-primary px-4">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section text-center position-relative">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-9 col-xl-8">
+          <div class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3 py-2 mb-3 fw-semibold">
+            <i class="bi bi-stars me-1"></i> Next-Generation Cloud Storage & Sharing
+          </div>
+          <h1 class="display-4 fw-extrabold mb-3 font-display">
+            Share Files Seamlessly with <span class="text-gradient">Zero Limits</span>
+          </h1>
+          <p class="lead text-muted mb-4 px-md-4">
+            Upload, secure, and share your documents, videos, and large archives in seconds. Protected with end-to-end encryption and custom access control.
+          </p>
+
+          <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 mb-5">
+            <a href="dashboard.html" class="btn btn-primary btn-lg px-4 py-3 d-flex align-items-center justify-content-center gap-2">
+              <i class="bi bi-speedometer2"></i> Open Dashboard
+            </a>
+            <a href="register.html" class="btn btn-outline-secondary btn-lg px-4 py-3 d-flex align-items-center justify-content-center gap-2">
+              <i class="bi bi-person-plus"></i> Create Free Account
+            </a>
+          </div>
+
+          <!-- Hero Floating Preview Card -->
+          <div class="card glass-card p-4 mx-auto text-start shadow-xl border-0" style="max-width: 780px;">
+            <div class="d-flex align-items-center justify-content-between pb-3 mb-3 border-bottom">
+              <div class="d-flex align-items-center gap-2">
+                <span class="badge bg-danger rounded-circle p-1"></span>
+                <span class="badge bg-warning rounded-circle p-1"></span>
+                <span class="badge bg-success rounded-circle p-1"></span>
+                <span class="small fw-semibold ms-2 text-muted">Quick Upload Demo</span>
+              </div>
+              <span class="badge bg-primary text-white rounded-pill"><i class="bi bi-shield-check me-1"></i> AES-256</span>
+            </div>
+            <div class="dropzone-container p-4">
+              <i class="bi bi-cloud-arrow-up dropzone-icon"></i>
+              <h5 class="fw-bold mb-1">Drag and drop your files here</h5>
+              <p class="text-muted small mb-3">Up to 10 GB per file. Supports PDF, ZIP, MP4, PNG and more.</p>
+              <a href="dashboard.html" class="btn btn-sm btn-primary px-3">Try in Dashboard</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="py-5 bg-white">
+    <div class="container py-4">
+      <div class="text-center mb-5">
+        <h6 class="text-primary fw-bold text-uppercase tracking-wider">Features</h6>
+        <h2 class="fw-bold font-display">Engineered for Speed, Built for Security</h2>
+        <p class="text-muted">Everything you need to store, organize, and distribute your digital assets.</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="feature-box h-100">
+            <div class="feature-icon-wrapper bg-primary-subtle text-primary">
+              <i class="bi bi-lightning-charge-fill"></i>
+            </div>
+            <h5 class="fw-bold">Lightning Fast Speeds</h5>
+            <p class="text-muted mb-0">Multi-threaded chunked uploads and global CDN distribution guarantee rapid transfers worldwide.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="feature-box h-100">
+            <div class="feature-icon-wrapper bg-info-subtle text-info">
+              <i class="bi bi-shield-lock-fill"></i>
+            </div>
+            <h5 class="fw-bold">Encrypted & Private</h5>
+            <p class="text-muted mb-0">Client-side encryption with custom password protected links and auto-expiring URLs.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="feature-box h-100">
+            <div class="feature-icon-wrapper bg-success-subtle text-success">
+              <i class="bi bi-qr-code-scan"></i>
+            </div>
+            <h5 class="fw-bold">Smart Link & QR Sharing</h5>
+            <p class="text-muted mb-0">Generate direct download links and scannable QR codes for seamless mobile access.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="feature-box h-100">
+            <div class="feature-icon-wrapper bg-warning-subtle text-warning">
+              <i class="bi bi-bar-chart-line-fill"></i>
+            </div>
+            <h5 class="fw-bold">Download Analytics</h5>
+            <p class="text-muted mb-0">Track view counts, download statistics, and file popularity right inside your dashboard.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="feature-box h-100">
+            <div class="feature-icon-wrapper bg-purple-subtle text-accent" style="background: #ede9fe; color: #8b5cf6;">
+              <i class="bi bi-folder-symlink-fill"></i>
+            </div>
+            <h5 class="fw-bold">Organized Categorization</h5>
+            <p class="text-muted mb-0">Automatic sorting into Documents, Images, Media, and Archives with instant instant search.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="feature-box h-100">
+            <div class="feature-icon-wrapper bg-danger-subtle text-danger">
+              <i class="bi bi-device-hdd-fill"></i>
+            </div>
+            <h5 class="fw-bold">Generous Free Tier</h5>
+            <p class="text-muted mb-0">Get up to 50 GB free cloud storage with instant account setup without credit card requirements.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Security & Call to action -->
+  <section id="security" class="py-5" style="background: #0f172a; color: #ffffff;">
+    <div class="container py-4">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <span class="badge bg-primary px-3 py-2 rounded-pill mb-3">Enterprise Grade Security</span>
+          <h2 class="display-6 fw-bold font-display mb-3">Your Files Stay Yours. Always Protected.</h2>
+          <p class="text-light opacity-75 mb-4">
+            We prioritize confidentiality and data integrity. Every uploaded file is hashed, encrypted, and isolated with strict access controls.
+          </p>
+          <ul class="list-unstyled d-flex flex-column gap-3 mb-4">
+            <li class="d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success fs-5"></i> End-to-End Zero Knowledge Architecture</li>
+            <li class="d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success fs-5"></i> Granular Expiration & Revocation Rules</li>
+            <li class="d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success fs-5"></i> Real-time Transfer Verification & Checksums</li>
+          </ul>
+          <a href="register.html" class="btn btn-primary btn-lg px-4">Start Sharing Securely</a>
+        </div>
+        <div class="col-lg-6">
+          <div class="card p-4 border-0 rounded-4" style="background: #1e293b; border: 1px solid #334155;">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <span class="text-muted small">Active Protection Status</span>
+              <span class="badge bg-success-subtle text-success">100% Operational</span>
+            </div>
+            <div class="p-3 rounded-3 mb-3" style="background: #0f172a;">
+              <div class="d-flex justify-content-between mb-2">
+                <span class="small text-muted">Encryption Algorithm</span>
+                <span class="small text-white fw-bold">AES-256-GCM</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span class="small text-muted">Integrity Check</span>
+                <span class="small text-white fw-bold">SHA-512 Verification</span>
+              </div>
+              <div class="d-flex justify-content-between">
+                <span class="small text-muted">Token Auth</span>
+                <span class="small text-white fw-bold">JWT Signed Bearer</span>
+              </div>
+            </div>
+            <p class="small text-muted mb-0"><i class="bi bi-info-circle me-1"></i> Continuous monitoring with automatic rate limiting and DDoS prevention.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Plans -->
+  <section id="pricing" class="py-5 bg-light">
+    <div class="container py-4">
+      <div class="text-center mb-5">
+        <h6 class="text-primary fw-bold text-uppercase">Pricing</h6>
+        <h2 class="fw-bold font-display">Simple, Transparent Plans</h2>
+        <p class="text-muted">Choose the ideal plan for yourself or your team.</p>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+        <!-- Free Plan -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 border-0 shadow-sm p-4 rounded-4">
+            <h5 class="fw-bold">Starter</h5>
+            <p class="text-muted small">Great for individuals and students</p>
+            <div class="my-3">
+              <span class="display-5 fw-bold">$0</span>
+              <span class="text-muted">/ forever</span>
+            </div>
+            <ul class="list-unstyled d-flex flex-column gap-2 mb-4">
+              <li class="d-flex align-items-center gap-2"><i class="bi bi-check2 text-primary"></i> 50 GB Cloud Storage</li>
+              <li class="d-flex align-items-center gap-2"><i class="bi bi-check2 text-primary"></i> 2 GB Max File Upload Size</li>
+              <li class="d-flex align-items-center gap-2"><i class="bi bi-check2 text-primary"></i> Instant Shareable Links</li>
+              <li class="d-flex align-items-center gap-2"><i class="bi bi-check2 text-primary"></i> Basic Download Analytics</li>
+            </ul>
+            <a href="register.html" class="btn btn-outline-primary mt-auto w-100">Get Started Free</a>
+          </div>
+        </div>
+
+        <!-- Pro Plan -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 border-primary border-2 shadow-lg p-4 rounded-4 position-relative bg-white">
+            <div class="position-absolute top-0 end-0 translate-middle-y me-4">
+              <span class="badge bg-primary px-3 py-2 rounded-pill">Most Popular</span>
+            </div>
+            <h5 class="fw-bold text-primary">Pro Team</h5>
+            <p class="text-muted small">For creators, teams, and professionals</p>
+            <div class="my-3">
+              <span class="display-5 fw-bold">$12</span>
+              <span class="text-muted">/ month</span>
+            </div>
+            <ul class="list-unstyled d-flex flex-column gap-2 mb-4">
+              <li class="d-flex align-items-center gap-2"><i class="bi bi-check2 text-primary"></i> 2 TB Cloud Storage</li>
+              <li class="d-flex align-items-center gap-2"><i class="bi bi-check2 text-primary"></i> 50 GB Max File Upload Size</li>
+              <li class="d-flex align-items-center gap-2"><i class="bi bi-check2 text-primary"></i> Password Protected Links</li>
+              <li class="d-flex align-items-center gap-2"><i class="bi bi-check2 text-primary"></i> Custom Expiration Dates</li>
+              <li class="d-flex align-items-center gap-2"><i class="bi bi-check2 text-primary"></i> Priority Support</li>
+            </ul>
+            <a href="register.html" class="btn btn-primary mt-auto w-100">Upgrade to Pro</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="py-5 bg-white">
+    <div class="container py-4" style="max-width: 800px;">
+      <div class="text-center mb-5">
+        <h6 class="text-primary fw-bold text-uppercase">FAQ</h6>
+        <h2 class="fw-bold font-display">Frequently Asked Questions</h2>
+      </div>
+
+      <div class="accordion" id="faqAccordion">
+        <div class="accordion-item border-0 mb-3 shadow-sm rounded-3 overflow-hidden">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              How does the file link sharing work?
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+            <div class="accordion-body text-muted">
+              Once you upload a file in the dashboard, click the "Share" icon to instantly produce a unique, secure URL. You can copy it with one click or generate a QR code for mobile recipients.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item border-0 mb-3 shadow-sm rounded-3 overflow-hidden">
+          <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Can I set an expiration date on shared links?
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+            <div class="accordion-body text-muted">
+              Yes! You can configure link durations (e.g. 1 hour, 24 hours, 7 days, or never) and revoke active links at any time from your file management panel.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item border-0 mb-3 shadow-sm rounded-3 overflow-hidden">
+          <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              What file formats are supported?
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+            <div class="accordion-body text-muted">
+              CloudShare supports all major formats including documents (PDF, DOCX, XLSX, PPTX), images (PNG, JPG, SVG, WebP), archives (ZIP, RAR, 7Z, TAR), audio and video (MP4, MKV, MP3).
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-4 bg-dark text-white-50 border-top border-secondary mt-auto">
+    <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
+      <div class="d-flex align-items-center gap-2">
+        <i class="bi bi-cloud-arrow-up-fill text-primary fs-5"></i>
+        <span class="text-white fw-bold">CloudShare</span>
+        <span>&copy; 2026. All rights reserved.</span>
+      </div>
+      <div class="d-flex gap-4">
+        <a href="index.html" class="text-white-50 text-decoration-none hover-white">Home</a>
+        <a href="login.html" class="text-white-50 text-decoration-none hover-white">Sign In</a>
+        <a href="register.html" class="text-white-50 text-decoration-none hover-white">Register</a>
+        <a href="dashboard.html" class="text-white-50 text-decoration-none hover-white">Dashboard</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5.3 JS Bundle CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <!-- Custom App JS -->
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - CloudShare</title>
+  <meta name="description" content="Manage your files, upload documents, share download links and check storage.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5.3 CSS via CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Bootstrap Icons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body id="dashboardLayout">
+
+  <!-- Top Dashboard Navbar -->
+  <header class="navbar navbar-expand-lg bg-white border-bottom sticky-top py-2 px-3">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
+      
+      <!-- Brand & Mobile Sidebar Toggle -->
+      <div class="d-flex align-items-center gap-3">
+        <button class="btn btn-light d-lg-none p-2 border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
+          <i class="bi bi-list fs-4"></i>
+        </button>
+        <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-dark fs-5 mb-0" href="index.html">
+          <div class="bg-primary text-white rounded-3 p-1 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+            <i class="bi bi-cloud-arrow-up-fill fs-6"></i>
+          </div>
+          <span>Cloud<span class="text-primary">Share</span></span>
+        </a>
+      </div>
+
+      <!-- Quick Search Bar -->
+      <div class="d-none d-md-block flex-grow-1 mx-4" style="max-width: 450px;">
+        <div class="input-group">
+          <span class="input-group-text bg-light border-end-0 text-muted"><i class="bi bi-search"></i></span>
+          <input type="text" id="fileSearchInput" class="form-control bg-light border-start-0" placeholder="Search files, documents, archives...">
+        </div>
+      </div>
+
+      <!-- User Profile & Quick Actions -->
+      <div class="d-flex align-items-center gap-3">
+        <button class="btn btn-primary d-none d-sm-flex align-items-center gap-2" onclick="document.getElementById('dashboardFileInput').click()">
+          <i class="bi bi-upload"></i> <span>Upload</span>
+        </button>
+
+        <div class="dropdown">
+          <button class="btn btn-light d-flex align-items-center gap-2 rounded-pill p-1 pe-3 border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold auth-user-initials" style="width: 32px; height: 32px; font-size: 0.85rem;">
+              AM
+            </div>
+            <span class="d-none d-sm-inline fw-semibold small auth-user-name">Alex Morgan</span>
+            <i class="bi bi-chevron-down text-muted small"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
+            <li class="px-3 py-2 border-bottom">
+              <p class="mb-0 fw-bold small auth-user-name">Alex Morgan</p>
+              <p class="mb-0 text-muted small auth-user-email">alex.morgan@cloudshare.io</p>
+            </li>
+            <li><a class="dropdown-item py-2" href="javascript:void(0)" onclick="showToast('Profile settings simulated', 'info')"><i class="bi bi-person me-2"></i>Profile Settings</a></li>
+            <li><a class="dropdown-item py-2" href="javascript:void(0)" onclick="showToast('Security preferences updated', 'info')"><i class="bi bi-shield-check me-2"></i>Security & Keys</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item py-2 text-danger" href="javascript:void(0)" id="btnLogout"><i class="bi bi-box-arrow-right me-2"></i>Sign Out</a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Mobile Offcanvas Sidebar -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel">
+    <div class="offcanvas-header border-bottom">
+      <h5 class="offcanvas-title fw-bold" id="sidebarOffcanvasLabel">
+        <i class="bi bi-cloud-arrow-up-fill text-primary me-2"></i>CloudShare
+      </h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column justify-content-between p-3">
+      <div>
+        <div class="d-flex flex-column gap-1 mb-4">
+          <a href="javascript:void(0)" data-category-filter="all" class="sidebar-nav-link active" data-bs-dismiss="offcanvas"><i class="bi bi-folder2"></i> All Files</a>
+          <a href="javascript:void(0)" data-category-filter="starred" class="sidebar-nav-link" data-bs-dismiss="offcanvas"><i class="bi bi-star"></i> Starred Files</a>
+          <a href="javascript:void(0)" data-category-filter="documents" class="sidebar-nav-link" data-bs-dismiss="offcanvas"><i class="bi bi-file-earmark-text"></i> Documents</a>
+          <a href="javascript:void(0)" data-category-filter="images" class="sidebar-nav-link" data-bs-dismiss="offcanvas"><i class="bi bi-images"></i> Photos & Images</a>
+          <a href="javascript:void(0)" data-category-filter="media" class="sidebar-nav-link" data-bs-dismiss="offcanvas"><i class="bi bi-film"></i> Audio & Videos</a>
+          <a href="javascript:void(0)" data-category-filter="archives" class="sidebar-nav-link" data-bs-dismiss="offcanvas"><i class="bi bi-file-earmark-zip"></i> Archives (Zip)</a>
+        </div>
+      </div>
+      <div class="storage-card">
+        <div class="d-flex justify-content-between small mb-2">
+          <span>Storage Used</span>
+          <span class="fw-bold">14.2%</span>
+        </div>
+        <div class="progress mb-2" style="height: 6px; background: rgba(255,255,255,0.2);">
+          <div class="progress-bar bg-info" style="width: 14.2%;"></div>
+        </div>
+        <div class="small text-white-50">7.1 GB of 50 GB used</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard Main Layout -->
+  <div class="dashboard-layout">
+
+    <!-- Desktop Sidebar -->
+    <aside class="dashboard-sidebar d-none d-lg-flex p-3 justify-content-between">
+      <div>
+        <div class="d-flex flex-column gap-1 mb-4">
+          <a href="javascript:void(0)" data-category-filter="all" class="sidebar-nav-link active"><i class="bi bi-folder2"></i> All Files</a>
+          <a href="javascript:void(0)" data-category-filter="starred" class="sidebar-nav-link"><i class="bi bi-star"></i> Starred Files</a>
+          <a href="javascript:void(0)" data-category-filter="documents" class="sidebar-nav-link"><i class="bi bi-file-earmark-text"></i> Documents</a>
+          <a href="javascript:void(0)" data-category-filter="images" class="sidebar-nav-link"><i class="bi bi-images"></i> Photos & Images</a>
+          <a href="javascript:void(0)" data-category-filter="media" class="sidebar-nav-link"><i class="bi bi-film"></i> Audio & Videos</a>
+          <a href="javascript:void(0)" data-category-filter="archives" class="sidebar-nav-link"><i class="bi bi-file-earmark-zip"></i> Archives (Zip)</a>
+        </div>
+
+        <hr class="border-secondary-subtle my-3">
+
+        <div class="px-2">
+          <div class="small fw-semibold text-muted text-uppercase mb-2" style="font-size: 0.75rem;">Shortcuts</div>
+          <div class="d-flex flex-column gap-1">
+            <a href="javascript:void(0)" onclick="showToast('Shared links list is filtered', 'info')" class="sidebar-nav-link py-2"><i class="bi bi-link-45deg"></i> Shared Links</a>
+            <a href="javascript:void(0)" onclick="showToast('Recycle bin is clean', 'info')" class="sidebar-nav-link py-2"><i class="bi bi-trash3"></i> Trash / Bin</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Storage Widget -->
+      <div class="storage-card">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <span class="small fw-semibold"><i class="bi bi-pie-chart-fill text-info me-1"></i> Storage</span>
+          <span class="small fw-bold" id="storagePercentText">14.2% Used</span>
+        </div>
+        <div class="progress mb-2" style="height: 6px; background: rgba(255,255,255,0.2);">
+          <div id="storageProgressBar" class="progress-bar bg-info" style="width: 14.2%;"></div>
+        </div>
+        <div class="small text-white-50" id="storageUsedText">7.1 GB of 50 GB</div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="dashboard-content">
+      <div class="container-fluid px-0">
+
+        <!-- Top Welcome & Stats Cards -->
+        <div class="row g-3 mb-4">
+          <div class="col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm p-3 rounded-3 bg-white h-100">
+              <div class="d-flex align-items-center gap-3">
+                <div class="p-3 bg-primary-subtle text-primary rounded-3">
+                  <i class="bi bi-files fs-4"></i>
+                </div>
+                <div>
+                  <div class="text-muted small">Total Files</div>
+                  <h4 class="fw-bold mb-0" id="totalFilesCount">5</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm p-3 rounded-3 bg-white h-100">
+              <div class="d-flex align-items-center gap-3">
+                <div class="p-3 bg-success-subtle text-success rounded-3">
+                  <i class="bi bi-cloud-check fs-4"></i>
+                </div>
+                <div>
+                  <div class="text-muted small">Storage Plan</div>
+                  <h4 class="fw-bold mb-0">50 GB Free</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm p-3 rounded-3 bg-white h-100">
+              <div class="d-flex align-items-center gap-3">
+                <div class="p-3 bg-warning-subtle text-warning rounded-3">
+                  <i class="bi bi-share fs-4"></i>
+                </div>
+                <div>
+                  <div class="text-muted small">Active Shares</div>
+                  <h4 class="fw-bold mb-0">3 Links</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm p-3 rounded-3 bg-white h-100">
+              <div class="d-flex align-items-center gap-3">
+                <div class="p-3 bg-info-subtle text-info rounded-3">
+                  <i class="bi bi-shield-check fs-4"></i>
+                </div>
+                <div>
+                  <div class="text-muted small">Security Status</div>
+                  <h4 class="fw-bold mb-0 text-success" style="font-size: 1.25rem;">Encrypted</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Drag & Drop Upload Card -->
+        <div class="card border-0 shadow-sm rounded-4 p-4 bg-white mb-4">
+          <input type="file" id="dashboardFileInput" class="d-none">
+          <div id="dashboardDropzone" class="dropzone-container">
+            <i class="bi bi-cloud-arrow-up-fill dropzone-icon"></i>
+            <h5 class="fw-bold mb-1">Drag & Drop files here or click to browse</h5>
+            <p class="text-muted small mb-3">Upload any document, image, media or archive file up to 2 GB</p>
+            <button class="btn btn-outline-primary btn-sm px-4" type="button">
+              <i class="bi bi-folder2-open me-1"></i> Browse Files
+            </button>
+          </div>
+
+          <!-- Upload Progress Animation Container -->
+          <div id="uploadProgressContainer" class="mt-3 p-3 bg-light rounded-3 d-none">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span id="uploadStatusText" class="small fw-semibold text-primary">Uploading file...</span>
+              <span class="spinner-border spinner-border-sm text-primary"></span>
+            </div>
+            <div class="progress" style="height: 6px;">
+              <div id="uploadProgressBar" class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Files Management Section Header -->
+        <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-3">
+          <!-- Filter Category Pills -->
+          <div class="d-flex flex-wrap gap-2">
+            <button class="filter-btn active" data-category-filter="all">All</button>
+            <button class="filter-btn" data-category-filter="documents"><i class="bi bi-file-earmark-text me-1"></i>Documents</button>
+            <button class="filter-btn" data-category-filter="images"><i class="bi bi-image me-1"></i>Images</button>
+            <button class="filter-btn" data-category-filter="media"><i class="bi bi-camera-video me-1"></i>Media</button>
+            <button class="filter-btn" data-category-filter="archives"><i class="bi bi-file-earmark-zip me-1"></i>Archives</button>
+            <button class="filter-btn" data-category-filter="starred"><i class="bi bi-star-fill text-warning me-1"></i>Starred</button>
+          </div>
+
+          <!-- View Switchers & Refresh -->
+          <div class="d-flex align-items-center gap-2">
+            <div class="btn-group btn-group-sm" role="group">
+              <button id="btnGridView" type="button" class="btn btn-primary active" title="Grid View">
+                <i class="bi bi-grid-fill"></i>
+              </button>
+              <button id="btnListView" type="button" class="btn btn-outline-secondary" title="List View">
+                <i class="bi bi-list-task"></i>
+              </button>
+            </div>
+            <button class="btn btn-sm btn-light border" onclick="Dashboard.render(); showToast('Files refreshed', 'info');" title="Refresh files">
+              <i class="bi bi-arrow-clockwise"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- File List Dynamic Container -->
+        <div id="fileListContainer">
+          <!-- Dynamically populated by app.js -->
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Share Link Modal -->
+  <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg rounded-4">
+        <div class="modal-header border-bottom-0 pb-0">
+          <h5 class="modal-title fw-bold" id="shareModalLabel">
+            <i class="bi bi-share-fill text-primary me-2"></i>Share File
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <p class="text-muted small mb-3">Anyone with this link will be able to view and download <strong id="shareModalFileName" class="text-dark">file.pdf</strong>.</p>
+          
+          <div class="mb-3">
+            <label class="form-label fw-semibold small text-muted">Public Shareable URL</label>
+            <div class="input-group">
+              <input type="text" id="shareModalLinkInput" class="form-control" readonly value="https://cloudshare.io/share/f-101">
+              <button class="btn btn-primary" type="button" onclick="copyShareLink()">
+                <i class="bi bi-clipboard me-1"></i> Copy
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-light p-3 rounded-3 mb-3">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="small fw-semibold">Link Expiration</span>
+              <select class="form-select form-select-sm w-auto">
+                <option value="never">Never expires</option>
+                <option value="24h">Expires in 24 Hours</option>
+                <option value="7d">Expires in 7 Days</option>
+                <option value="30d">Expires in 30 Days</option>
+              </select>
+            </div>
+            <div class="form-check form-switch mt-2">
+              <input class="form-check-input" type="checkbox" id="requirePasswordSwitch">
+              <label class="form-check-label small" for="requirePasswordSwitch">Require Password to download</label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer border-top-0 pt-0 d-flex justify-content-between">
+          <a id="shareModalOpenLinkBtn" href="#" target="_blank" class="btn btn-outline-primary">
+            <i class="bi bi-box-arrow-up-right me-1"></i> Open Link
+          </a>
+          <div class="d-flex gap-2">
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Done</button>
+            <button type="button" class="btn btn-primary" onclick="copyShareLink()">Copy & Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toastNotificationContainer" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+
+  <!-- Bootstrap 5.3 JS Bundle CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <!-- Custom App JS -->
+  <script src="app.js"></script>
+</body>
+</html>

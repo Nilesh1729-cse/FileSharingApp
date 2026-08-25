@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Free Account - CloudShare</title>
+  <meta name="description" content="Sign up for CloudShare to start uploading and sharing files with 50 GB free storage.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5.3 CSS via CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Bootstrap Icons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-light">
+
+  <!-- Minimal Nav Header -->
+  <nav class="navbar navbar-expand-lg bg-white border-bottom py-3">
+    <div class="container justify-content-between">
+      <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-dark fs-5" href="index.html">
+        <div class="bg-primary text-white rounded-3 p-1 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+          <i class="bi bi-cloud-arrow-up-fill fs-6"></i>
+        </div>
+        <span>Cloud<span class="text-primary">Share</span></span>
+      </a>
+      <span class="text-muted small">
+        Already have an account? <a href="login.html" class="text-primary text-decoration-none fw-semibold">Sign In</a>
+      </span>
+    </div>
+  </nav>
+
+  <!-- Register Area -->
+  <main class="auth-wrapper py-5">
+    <div class="container d-flex justify-content-center">
+      <div class="auth-card p-4 p-md-5">
+        <div class="text-center mb-4">
+          <div class="auth-header-icon mb-3 mx-auto">
+            <i class="bi bi-person-plus-fill"></i>
+          </div>
+          <h3 class="fw-bold font-display">Create an Account</h3>
+          <p class="text-muted small">Get 50 GB free cloud storage immediately</p>
+        </div>
+
+        <form id="registerForm" novalidate>
+          <!-- Full Name -->
+          <div class="mb-3">
+            <label for="regName" class="form-label fw-semibold small text-muted">Full Name</label>
+            <div class="input-group">
+              <span class="input-group-text bg-light text-muted"><i class="bi bi-person"></i></span>
+              <input type="text" class="form-control" id="regName" placeholder="e.g. Jordan Miller" required value="Jordan Miller">
+            </div>
+          </div>
+
+          <!-- Email Address -->
+          <div class="mb-3">
+            <label for="regEmail" class="form-label fw-semibold small text-muted">Email Address</label>
+            <div class="input-group">
+              <span class="input-group-text bg-light text-muted"><i class="bi bi-envelope"></i></span>
+              <input type="email" class="form-control" id="regEmail" placeholder="name@company.com" required value="jordan.miller@example.com">
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="mb-2">
+            <label for="regPassword" class="form-label fw-semibold small text-muted">Password</label>
+            <div class="input-group">
+              <span class="input-group-text bg-light text-muted"><i class="bi bi-shield-lock"></i></span>
+              <input type="password" class="form-control" id="regPassword" placeholder="At least 6 characters" required value="StrongPass2026!">
+              <button class="btn btn-outline-secondary password-toggle-btn" type="button">
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+            <!-- Password Strength Bar -->
+            <div class="mt-2">
+              <div class="progress" style="height: 4px;">
+                <div id="passwordStrengthBar" class="strength-bar bg-success" style="width: 100%;"></div>
+              </div>
+              <small class="text-muted" style="font-size: 0.75rem;">Include letters, numbers, and symbols for best security.</small>
+            </div>
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="mb-3 mt-3">
+            <label for="regConfirmPassword" class="form-label fw-semibold small text-muted">Confirm Password</label>
+            <div class="input-group">
+              <span class="input-group-text bg-light text-muted"><i class="bi bi-shield-check"></i></span>
+              <input type="password" class="form-control" id="regConfirmPassword" placeholder="Re-enter password" required value="StrongPass2026!">
+            </div>
+          </div>
+
+          <!-- Terms & Policy Checkbox -->
+          <div class="form-check mb-4">
+            <input class="form-check-input" type="checkbox" id="agreeTerms" checked required>
+            <label class="form-check-label small text-muted" for="agreeTerms">
+              I agree to the <a href="javascript:void(0)" class="text-primary text-decoration-none">Terms of Service</a> & <a href="javascript:void(0)" class="text-primary text-decoration-none">Privacy Policy</a>
+            </label>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-primary w-100 py-2 mb-3 fw-semibold">
+            Create Free Account
+          </button>
+
+          <!-- Divider -->
+          <div class="position-relative text-center my-3">
+            <hr class="border-secondary-subtle">
+            <span class="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted small">or register with</span>
+          </div>
+
+          <!-- Social Buttons -->
+          <div class="row g-2">
+            <div class="col-6">
+              <button type="button" class="btn btn-light border w-100 py-2 d-flex align-items-center justify-content-center gap-2 small" onclick="showToast('Google registration simulated', 'info')">
+                <i class="bi bi-google text-danger"></i> Google
+              </button>
+            </div>
+            <div class="col-6">
+              <button type="button" class="btn btn-light border w-100 py-2 d-flex align-items-center justify-content-center gap-2 small" onclick="showToast('GitHub registration simulated', 'info')">
+                <i class="bi bi-github text-dark"></i> GitHub
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bootstrap 5.3 JS Bundle CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <!-- Custom App JS -->
+  <script src="app.js"></script>
+</body>
+</html>

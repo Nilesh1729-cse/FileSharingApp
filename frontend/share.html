@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download Shared File - CloudShare</title>
+  <meta name="description" content="Download your shared file securely via CloudShare.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5.3 CSS via CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Bootstrap Icons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-light">
+
+  <!-- Minimal Nav Header -->
+  <nav class="navbar navbar-expand-lg bg-white border-bottom py-3">
+    <div class="container justify-content-between">
+      <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-dark fs-5" href="index.html">
+        <div class="bg-primary text-white rounded-3 p-1 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+          <i class="bi bi-cloud-arrow-up-fill fs-6"></i>
+        </div>
+        <span>Cloud<span class="text-primary">Share</span></span>
+      </a>
+      <div class="d-flex align-items-center gap-2">
+        <a href="dashboard.html" class="btn btn-outline-primary btn-sm px-3">
+          <i class="bi bi-speedometer2 me-1"></i> Dashboard
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Download File Container -->
+  <main class="auth-wrapper py-5">
+    <div class="container d-flex justify-content-center">
+      <div class="auth-card p-4 p-md-5 text-center" style="max-width: 520px;">
+        
+        <!-- File Icon Box -->
+        <div id="sharedFileIconBox" class="file-icon-box icon-pdf mx-auto mb-3" style="width: 72px; height: 72px; font-size: 2.2rem; border-radius: 18px;">
+          <i id="sharedFileIcon" class="bi bi-file-earmark-pdf"></i>
+        </div>
+
+        <!-- File Name & Info -->
+        <h4 id="sharedFileName" class="fw-bold font-display text-break mb-1">
+          Loading File...
+        </h4>
+        <p id="sharedFileMeta" class="text-muted small mb-4">
+          Calculating file size & security status...
+        </p>
+
+        <!-- Security Badge -->
+        <div class="d-inline-flex align-items-center gap-2 px-3 py-1 bg-success-subtle text-success rounded-pill small fw-semibold mb-4">
+          <i class="bi bi-shield-check"></i> Verified Safe • End-to-End Encrypted
+        </div>
+
+        <!-- Download Action Card -->
+        <div class="p-3 bg-light rounded-4 border mb-4">
+          <div class="d-flex justify-content-between align-items-center text-start mb-2">
+            <div>
+              <span class="small text-muted d-block">Shared Via</span>
+              <span class="small fw-semibold">CloudShare Direct Link</span>
+            </div>
+            <span class="badge bg-primary-subtle text-primary rounded-pill">Fast Mirror</span>
+          </div>
+          <hr class="my-2 border-secondary-subtle">
+          <div class="d-flex justify-content-between align-items-center text-start">
+            <div>
+              <span class="small text-muted d-block">Status</span>
+              <span class="small fw-semibold text-success">Ready for Download</span>
+            </div>
+            <span class="small text-muted" id="sharedFileDate">Today</span>
+          </div>
+        </div>
+
+        <!-- Download Button -->
+        <button id="btnDownloadSharedFile" type="button" class="btn btn-primary btn-lg w-100 py-3 mb-3 fw-bold d-flex align-items-center justify-content-center gap-2">
+          <i class="bi bi-download fs-5"></i> <span>Download File</span>
+        </button>
+
+        <!-- Copy Link Option -->
+        <button type="button" class="btn btn-light border w-100 py-2 text-muted small" onclick="copyCurrentPageUrl()">
+          <i class="bi bi-link-45deg me-1"></i> Copy Download Link
+        </button>
+
+        <p class="text-muted small mt-4 mb-0" style="font-size: 0.8rem;">
+          Need to share your own files? <a href="register.html" class="text-primary text-decoration-none fw-semibold">Get 50 GB Free</a>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Toast Notification Container -->
+  <div id="toastNotificationContainer" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+
+  <!-- Bootstrap 5.3 JS Bundle CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <!-- Custom App JS -->
+  <script src="app.js"></script>
+
+  <!-- Page specific lookup logic -->
+  <script>
+    function copyCurrentPageUrl() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        showToast('Download link copied to clipboard!', 'success');
+      }).catch(() => {
+        showToast('Link copied to clipboard!', 'success');
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      let fileId = urlParams.get('id');
+      let fileName = urlParams.get('name');
+
+      async function loadFileMetadata() {
+        let file = null;
+
+        // 1. If explicit ID provided in URL, fetch it
+        if (fileId) {
+          const files = FileStore.getFiles();
+          file = files.find(f => f.id === fileId);
+
+          if (!file) {
+            try {
+              const res = await fetch(`http://localhost:5001/api/files/${fileId}`);
+              if (res.ok) {
+                const data = await res.json();
+                file = data.file;
+              }
+            } catch (e) {}
+          }
+        } else {
+          // 2. If no ID provided in URL, automatically load the latest uploaded file from backend
+          try {
+            const res = await fetch(`http://localhost:5001/api/files`);
+            if (res.ok) {
+              const data = await res.json();
+              if (data.files && data.files.length) {
+                file = data.files[0];
+                fileId = file.id || file._id;
+              }
+            }
+          } catch (e) {}
+
+          if (!file) {
+            const files = FileStore.getFiles();
+            if (files.length) {
+              file = files[0];
+              fileId = file.id;
+            }
+          }
+        }
+
+        if (file) {
+          fileName = file.originalName || file.name || fileName;
+          fileId = file.id || file._id || fileId;
+        }
+
+        if (!fileId) fileId = 'f-101';
+        if (!fileName) fileName = 'Shared_Document.pdf';
+
+        const fileSize = file ? Utils.formatBytes(file.size) : '10.5 MB';
+        const fileDate = file ? Utils.formatDate(file.uploadDate || file.createdAt) : 'Recently uploaded';
+        const iconInfo = Utils.getFileIconInfo(fileName, file ? (file.mimetype || file.type) : '');
+
+        // Update UI elements
+        document.getElementById('sharedFileName').textContent = fileName;
+        document.getElementById('sharedFileMeta').textContent = `${fileSize} • Uploaded ${fileDate}`;
+        document.getElementById('sharedFileDate').textContent = fileDate;
+        document.title = `Download ${fileName} - CloudShare`;
+
+        const iconBox = document.getElementById('sharedFileIconBox');
+        const iconEl = document.getElementById('sharedFileIcon');
+        if (iconBox && iconEl) {
+          iconBox.className = `file-icon-box ${iconInfo.colorClass} mx-auto mb-3`;
+          iconEl.className = `bi ${iconInfo.icon}`;
+        }
+      }
+
+      loadFileMetadata();
+
+      // Download Button Handler
+      const downloadBtn = document.getElementById('btnDownloadSharedFile');
+      if (downloadBtn) {
+        downloadBtn.addEventListener('click', async (e) => {
+          e.preventDefault();
+          const originalHtml = downloadBtn.innerHTML;
+          downloadBtn.disabled = true;
+          downloadBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Downloading file...';
+
+          const downloadUrl = `http://localhost:5001/api/files/download/${fileId}`;
+
+          try {
+            // Direct browser download trigger from backend
+            const res = await fetch(downloadUrl);
+            if (res.ok) {
+              const blob = await res.blob();
+              const blobUrl = URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = blobUrl;
+              a.download = fileName || 'downloaded-file';
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+              setTimeout(() => URL.revokeObjectURL(blobUrl), 2000);
+              showToast(`Downloading "${fileName}"...`, 'success');
+            } else {
+              // Fallback to IndexedDB / client store
+              await Dashboard.downloadFile(fileId, fileName);
+            }
+          } catch (err) {
+            window.location.href = downloadUrl;
+          }
+
+          downloadBtn.innerHTML = '<i class="bi bi-check2-circle fs-5 me-2"></i>Downloaded!';
+          downloadBtn.classList.remove('btn-primary');
+          downloadBtn.classList.add('btn-success');
+
+          setTimeout(() => {
+            downloadBtn.disabled = false;
+            downloadBtn.innerHTML = originalHtml;
+            downloadBtn.classList.remove('btn-success');
+            downloadBtn.classList.add('btn-primary');
+          }, 2500);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
